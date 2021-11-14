@@ -1,0 +1,23 @@
+import os
+print('Hello! This is a script to make sure hardware usage for tensorflow!')
+print('checking Tensorflow and GPU...')
+#os.system('pip install tensorflow')
+import tensorflow as tf
+print('Checking Tensorflow:')
+print(tf.__version__)
+print()
+print()
+print('Checking Harware Use :')
+print(tf.config.list_physical_devices())
+print()
+print()
+print('Checking CUDA:')
+print(os.system('nvcc --version'))
+print()
+print()
+print("Checking if this hardware uses GPU")
+device_name = tf.test.gpu_device_name()
+if device_name != '/device:GPU:0':
+  raise SystemError('GPU device not found')
+print('Found GPU at: {}'.format(device_name))
+print(os.system('nvidia-smi'))
