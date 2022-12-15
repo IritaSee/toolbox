@@ -3,6 +3,8 @@ import numpy as np
 
 cifar = tf.keras.datasets.fashion_mnist
 (x_train, y_train), (x_test, y_test) = cifar.load_data()
+x_test = np.expand_dims(x_test, axis=-1)
+x_train = np.expand_dims(x_train, axis=-1)
 
 # model = tf.keras.applications.MobileNetV2(
 #     include_top=True,
@@ -14,7 +16,7 @@ cifar = tf.keras.datasets.fashion_mnist
 
 model = tf.keras.models.Sequential()
 model.add(tf.keras.layers.Conv2D(16, (2,2), input_shape=(28, 28, 1)))
-model.add(tf.keras.layers.MaxPool2D())
+model.add(tf.keras.layers.MaxPool2D((2, 2)))
 model.add(tf.keras.layers.Flatten())
 model.add(tf.keras.layers.Dense(1024, activation='relu'))   
 model.add(tf.keras.layers.Dense(256, activation='relu'))
